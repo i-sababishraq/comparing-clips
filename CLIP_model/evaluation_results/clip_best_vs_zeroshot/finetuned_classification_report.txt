@@ -1,0 +1,23 @@
+Fine-tuned CLIP Classification Report
+==================================================
+
+                    precision    recall  f1-score   support
+
+           calling       0.08      1.00      0.14       126
+          clapping       0.00      0.00      0.00       126
+           cycling       0.00      0.00      0.00       126
+           dancing       0.00      0.00      0.00       126
+          drinking       0.00      0.00      0.00       126
+            eating       0.00      0.00      0.00       126
+          fighting       0.00      0.00      0.00       126
+           hugging       0.00      0.00      0.00       126
+          laughing       0.00      0.00      0.00       126
+listening_to_music       0.00      0.00      0.00       126
+           running       0.00      0.00      0.00       126
+           sitting       0.00      0.00      0.00       126
+          sleeping       0.00      0.00      0.00       126
+           texting       0.00      0.00      0.00        22
+
+          accuracy                           0.08      1660
+         macro avg       0.01      0.07      0.01      1660
+      weighted avg       0.01      0.08      0.01      1660

@@ -1,0 +1,23 @@
+Baseline CLIP Classification Report
+==================================================
+
+                    precision    recall  f1-score   support
+
+           calling       0.88      0.73      0.80       126
+          clapping       0.82      0.79      0.81       126
+           cycling       0.95      1.00      0.98       126
+           dancing       0.87      0.89      0.88       126
+          drinking       0.86      0.90      0.88       126
+            eating       0.89      0.89      0.89       126
+          fighting       0.90      0.94      0.92       126
+           hugging       0.90      0.84      0.87       126
+          laughing       0.70      0.93      0.80       126
+listening_to_music       0.88      0.83      0.85       126
+           running       0.96      0.87      0.91       126
+           sitting       0.76      0.59      0.66       126
+          sleeping       0.92      0.95      0.94       126
+           texting       0.50      0.86      0.63        22
+
+          accuracy                           0.86      1660
+         macro avg       0.84      0.86      0.84      1660
+      weighted avg       0.86      0.86      0.86      1660
