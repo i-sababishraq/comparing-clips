@@ -1,0 +1,66 @@
+Metric,Value,Type
+Accuracy,0.8928,Overall
+Top-3 Accuracy,0.9813,Overall
+Top-5 Accuracy,0.9946,Overall
+Macro Precision,0.8727,Overall
+Macro Recall,0.8937,Overall
+Macro F1,0.8725,Overall
+Weighted Precision,0.9041,Overall
+Weighted Recall,0.8928,Overall
+Weighted F1,0.8942,Overall
+Precision,0.8106,Class_calling
+Recall,0.8492,Class_calling
+F1-Score,0.8295,Class_calling
+Support,126.0,Class_calling
+Precision,0.9358,Class_clapping
+Recall,0.8095,Class_clapping
+F1-Score,0.8681,Class_clapping
+Support,126.0,Class_clapping
+Precision,0.9474,Class_cycling
+Recall,1.0,Class_cycling
+F1-Score,0.973,Class_cycling
+Support,126.0,Class_cycling
+Precision,0.9417,Class_dancing
+Recall,0.8968,Class_dancing
+F1-Score,0.9187,Class_dancing
+Support,126.0,Class_dancing
+Precision,0.8815,Class_drinking
+Recall,0.9444,Class_drinking
+F1-Score,0.9119,Class_drinking
+Support,126.0,Class_drinking
+Precision,0.9542,Class_eating
+Recall,0.9921,Class_eating
+F1-Score,0.9728,Class_eating
+Support,126.0,Class_eating
+Precision,0.9044,Class_fighting
+Recall,0.9762,Class_fighting
+F1-Score,0.9389,Class_fighting
+Support,126.0,Class_fighting
+Precision,0.907,Class_hugging
+Recall,0.9286,Class_hugging
+F1-Score,0.9176,Class_hugging
+Support,126.0,Class_hugging
+Precision,0.9298,Class_laughing
+Recall,0.8413,Class_laughing
+F1-Score,0.8833,Class_laughing
+Support,126.0,Class_laughing
+Precision,0.8943,Class_listening_to_music
+Recall,0.873,Class_listening_to_music
+F1-Score,0.8835,Class_listening_to_music
+Support,126.0,Class_listening_to_music
+Precision,0.9664,Class_running
+Recall,0.9127,Class_running
+F1-Score,0.9388,Class_running
+Support,126.0,Class_running
+Precision,0.8989,Class_sitting
+Recall,0.6349,Class_sitting
+F1-Score,0.7442,Class_sitting
+Support,126.0,Class_sitting
+Precision,0.875,Class_sleeping
+Recall,0.9444,Class_sleeping
+F1-Score,0.9084,Class_sleeping
+Support,126.0,Class_sleeping
+Precision,0.3704,Class_texting
+Recall,0.9091,Class_texting
+F1-Score,0.5263,Class_texting
+Support,22.0,Class_texting

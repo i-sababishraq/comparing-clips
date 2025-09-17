@@ -17,7 +17,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 
 import clip
-from train_clip_har_clean import HARDataset
+from har_dataset import HARDataset
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

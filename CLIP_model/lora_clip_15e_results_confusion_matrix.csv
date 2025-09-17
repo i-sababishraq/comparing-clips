@@ -1,0 +1,15 @@
+,calling,clapping,cycling,dancing,drinking,eating,fighting,hugging,laughing,listening_to_music,running,sitting,sleeping,texting
+calling,107,0,1,0,3,0,0,0,1,5,0,1,1,7
+clapping,1,102,0,3,0,1,2,1,7,1,0,3,0,5
+cycling,0,0,126,0,0,0,0,0,0,0,0,0,0,0
+dancing,0,2,0,113,0,0,4,2,0,4,1,0,0,0
+drinking,3,1,1,0,119,1,0,0,0,0,0,0,1,0
+eating,0,0,0,0,1,125,0,0,0,0,0,0,0,0
+fighting,1,0,0,0,1,0,123,0,0,0,1,0,0,0
+hugging,0,0,0,1,0,1,0,117,0,0,0,3,4,0
+laughing,2,3,0,1,2,0,0,5,106,0,0,1,1,5
+listening_to_music,2,0,1,0,4,0,0,0,0,110,1,0,0,8
+running,1,0,0,1,1,0,7,0,0,1,115,0,0,0
+sitting,12,1,4,1,2,3,0,4,0,1,0,80,10,8
+sleeping,1,0,0,0,2,0,0,0,0,1,1,1,119,1
+texting,2,0,0,0,0,0,0,0,0,0,0,0,0,20

@@ -15,7 +15,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 import clip
-from train_clip_har_clean import HARDataset
+from har_dataset import HARDataset
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

@@ -1,66 +1,66 @@
 Metric,Value,Type
-Accuracy,0.8867469879518072,Overall
-Top-3 Accuracy,0.9789156626506024,Overall
-Top-5 Accuracy,0.9939759036144579,Overall
-Macro Precision,0.8656241171409838,Overall
-Macro Recall,0.8853844568130282,Overall
-Macro F1,0.8663669264427761,Overall
-Weighted Precision,0.8955628988099101,Overall
-Weighted Recall,0.8867469879518072,Overall
-Weighted F1,0.8871140279602836,Overall
-Precision,0.8153846153846154,Class_calling
-Recall,0.8412698412698413,Class_calling
-F1-Score,0.828125,Class_calling
+Accuracy,0.8867,Overall
+Top-3 Accuracy,0.9789,Overall
+Top-5 Accuracy,0.994,Overall
+Macro Precision,0.8656,Overall
+Macro Recall,0.8854,Overall
+Macro F1,0.8664,Overall
+Weighted Precision,0.8956,Overall
+Weighted Recall,0.8867,Overall
+Weighted F1,0.8871,Overall
+Precision,0.8154,Class_calling
+Recall,0.8413,Class_calling
+F1-Score,0.8281,Class_calling
 Support,126.0,Class_calling
-Precision,0.865546218487395,Class_clapping
-Recall,0.8174603174603174,Class_clapping
-F1-Score,0.8408163265306122,Class_clapping
+Precision,0.8655,Class_clapping
+Recall,0.8175,Class_clapping
+F1-Score,0.8408,Class_clapping
 Support,126.0,Class_clapping
-Precision,0.9767441860465116,Class_cycling
+Precision,0.9767,Class_cycling
 Recall,1.0,Class_cycling
-F1-Score,0.9882352941176471,Class_cycling
+F1-Score,0.9882,Class_cycling
 Support,126.0,Class_cycling
-Precision,0.940677966101695,Class_dancing
-Recall,0.8809523809523809,Class_dancing
-F1-Score,0.9098360655737705,Class_dancing
+Precision,0.9407,Class_dancing
+Recall,0.881,Class_dancing
+F1-Score,0.9098,Class_dancing
 Support,126.0,Class_dancing
-Precision,0.8705035971223022,Class_drinking
-Recall,0.9603174603174603,Class_drinking
-F1-Score,0.9132075471698113,Class_drinking
+Precision,0.8705,Class_drinking
+Recall,0.9603,Class_drinking
+F1-Score,0.9132,Class_drinking
 Support,126.0,Class_drinking
-Precision,0.9538461538461539,Class_eating
-Recall,0.9841269841269841,Class_eating
-F1-Score,0.96875,Class_eating
+Precision,0.9538,Class_eating
+Recall,0.9841,Class_eating
+F1-Score,0.9688,Class_eating
 Support,126.0,Class_eating
-Precision,0.8970588235294118,Class_fighting
-Recall,0.9682539682539683,Class_fighting
-F1-Score,0.9312977099236641,Class_fighting
+Precision,0.8971,Class_fighting
+Recall,0.9683,Class_fighting
+F1-Score,0.9313,Class_fighting
 Support,126.0,Class_fighting
-Precision,0.9015151515151515,Class_hugging
-Recall,0.9444444444444444,Class_hugging
-F1-Score,0.9224806201550387,Class_hugging
+Precision,0.9015,Class_hugging
+Recall,0.9444,Class_hugging
+F1-Score,0.9225,Class_hugging
 Support,126.0,Class_hugging
-Precision,0.8934426229508197,Class_laughing
-Recall,0.8650793650793651,Class_laughing
-F1-Score,0.8790322580645161,Class_laughing
+Precision,0.8934,Class_laughing
+Recall,0.8651,Class_laughing
+F1-Score,0.879,Class_laughing
 Support,126.0,Class_laughing
-Precision,0.908256880733945,Class_listening_to_music
-Recall,0.7857142857142857,Class_listening_to_music
-F1-Score,0.8425531914893617,Class_listening_to_music
+Precision,0.9083,Class_listening_to_music
+Recall,0.7857,Class_listening_to_music
+F1-Score,0.8426,Class_listening_to_music
 Support,126.0,Class_listening_to_music
-Precision,0.9583333333333334,Class_running
-Recall,0.9126984126984127,Class_running
-F1-Score,0.9349593495934959,Class_running
+Precision,0.9583,Class_running
+Recall,0.9127,Class_running
+F1-Score,0.935,Class_running
 Support,126.0,Class_running
-Precision,0.8863636363636364,Class_sitting
-Recall,0.6190476190476191,Class_sitting
-F1-Score,0.7289719626168224,Class_sitting
+Precision,0.8864,Class_sitting
+Recall,0.619,Class_sitting
+F1-Score,0.729,Class_sitting
 Support,126.0,Class_sitting
-Precision,0.8633093525179856,Class_sleeping
-Recall,0.9523809523809523,Class_sleeping
-F1-Score,0.9056603773584906,Class_sleeping
+Precision,0.8633,Class_sleeping
+Recall,0.9524,Class_sleeping
+F1-Score,0.9057,Class_sleeping
 Support,126.0,Class_sleeping
-Precision,0.3877551020408163,Class_texting
-Recall,0.8636363636363636,Class_texting
-F1-Score,0.5352112676056338,Class_texting
+Precision,0.3878,Class_texting
+Recall,0.8636,Class_texting
+F1-Score,0.5352,Class_texting
 Support,22.0,Class_texting

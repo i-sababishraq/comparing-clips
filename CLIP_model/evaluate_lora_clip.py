@@ -13,7 +13,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 import clip
-from train_clip_har_clean import HARDataset
+from har_dataset import HARDataset
 from train_clip_lora import LoRACLIP
 
 logging.basicConfig(level=logging.INFO)
@@ -179,47 +179,47 @@ def main():
     # Overall metrics
     results_data.append({
         'Metric': 'Accuracy',
-        'Value': metrics['accuracy'],
+        'Value': round(metrics['accuracy'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Top-3 Accuracy',
-        'Value': metrics['top3_accuracy'],
+        'Value': round(metrics['top3_accuracy'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Top-5 Accuracy',
-        'Value': metrics['top5_accuracy'],
+        'Value': round(metrics['top5_accuracy'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Macro Precision',
-        'Value': metrics['macro_precision'],
+        'Value': round(metrics['macro_precision'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Macro Recall',
-        'Value': metrics['macro_recall'],
+        'Value': round(metrics['macro_recall'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Macro F1',
-        'Value': metrics['macro_f1'],
+        'Value': round(metrics['macro_f1'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Weighted Precision',
-        'Value': metrics['weighted_precision'],
+        'Value': round(metrics['weighted_precision'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Weighted Recall',
-        'Value': metrics['weighted_recall'],
+        'Value': round(metrics['weighted_recall'], 4),
         'Type': 'Overall'
     })
     results_data.append({
         'Metric': 'Weighted F1',
-        'Value': metrics['weighted_f1'],
+        'Value': round(metrics['weighted_f1'], 4),
         'Type': 'Overall'
     })
     
@@ -236,22 +236,22 @@ def main():
         if class_name in report:
             results_data.append({
                 'Metric': 'Precision',
-                'Value': report[class_name]['precision'],
+                'Value': round(report[class_name]['precision'], 4),
                 'Type': f'Class_{class_name}'
             })
             results_data.append({
                 'Metric': 'Recall',
-                'Value': report[class_name]['recall'],
+                'Value': round(report[class_name]['recall'], 4),
                 'Type': f'Class_{class_name}'
             })
             results_data.append({
                 'Metric': 'F1-Score',
-                'Value': report[class_name]['f1-score'],
+                'Value': round(report[class_name]['f1-score'], 4),
                 'Type': f'Class_{class_name}'
             })
             results_data.append({
                 'Metric': 'Support',
-                'Value': report[class_name]['support'],
+                'Value': int(report[class_name]['support']),
                 'Type': f'Class_{class_name}'
             })
     
