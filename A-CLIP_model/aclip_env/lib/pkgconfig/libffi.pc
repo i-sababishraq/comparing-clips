@@ -1,0 +1,11 @@
+prefix=/anvil/projects/x-soc250046/x-sishraq/CLIP/A-CLIP_model/aclip_env
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+toolexeclibdir=${libdir}
+includedir=/anvil/projects/x-soc250046/x-sishraq/CLIP/A-CLIP_model/aclip_env/include
+
+Name: libffi
+Description: Library supporting Foreign Function Interfaces
+Version: 3.4.4
+Libs: -L${toolexeclibdir} -lffi
+Cflags: -I${includedir}

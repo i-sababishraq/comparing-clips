@@ -1,0 +1,37 @@
+{
+    "model_name": "ViT-B/32",
+    "batch_size": 128,
+    "epochs": 5,
+    "learning_rate": 5e-6,
+    "weight_decay": 0.1,
+    "warmup_epochs": 2,
+    "num_workers": 4,
+    "checkpoint_dir": "./checkpoints",
+    "save_every_n_epochs": 5,
+    "eval_every_n_epochs": 1,
+    "gradient_clip_norm": 1.0,
+    "dataset_config": {
+        "text_templates": [
+            "a photo of a person {}",
+            "someone {}",
+            "a person performing {}",
+            "{} action",
+            "human {}",
+            "a video frame of someone {}",
+            "footage of a person {}"
+        ]
+    },
+    "optimization": {
+        "vision_lr_multiplier": 1.0,
+        "text_lr_multiplier": 0.1,
+        "projection_lr_multiplier": 1.0,
+        "betas": [0.9, 0.98],
+        "eps": 1e-6
+    },
+    "logging": {
+        "log_interval": 100,
+        "eval_interval": 1000
+    }
+}
+
+

@@ -1,0 +1,7 @@
+prefix=/anvil/projects/x-soc250046/x-sishraq/CLIP/A-CLIP_model/aclip_env
+includedir=${prefix}/include
+ 
+Name: PresentProto
+Description: Present extension headers
+Version: 1.4
+Cflags: -I${includedir}

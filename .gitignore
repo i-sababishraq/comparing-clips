@@ -1,0 +1,47 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Environments
+*.env
+.env*
+.venv/
+env/
+venv/
+*/siglip_env/
+
+# Data and artifacts
+data/
+checkpoints/
+results/
+logs/
+*.pt
+*.ckpt
+*.h5
+*.ckpt.*
+*.onnx
+
+# Images and large media (source datasets)
+*.jpg
+*.jpeg
+*.png
+*.zip
+*.tar
+*.tar.gz
+
+# HF caches and vendor deps
+SIGLIP_model/hf_cache/
+SIGLIP_model/vendor/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Python packaging
+dist/
+build/
+*.egg-info/
+

@@ -1,0 +1,15 @@
+# Additional requirements for HAR fine-tuning
+# Base CLIP requirements are already in requirements.txt
+
+scikit-learn>=1.2.0
+pandas>=1.5.0
+matplotlib>=3.6.0
+seaborn>=0.12.0
+kaggle>=1.5.12
+wandb>=0.13.0
+tensorboard>=2.11.0
+opencv-python>=4.7.0
+jupyter>=1.0.0
+ipykernel>=6.19.0
+
+

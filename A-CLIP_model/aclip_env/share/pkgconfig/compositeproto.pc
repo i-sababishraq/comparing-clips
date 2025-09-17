@@ -1,0 +1,7 @@
+prefix=/anvil/projects/x-soc250046/x-sishraq/CLIP/A-CLIP_model/aclip_env
+includedir=${prefix}/include
+
+Name: CompositeExt
+Description: Composite extension headers
+Version: 0.4.2
+Cflags: -I${includedir}
