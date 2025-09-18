@@ -10,7 +10,10 @@ from typing import Optional
 
 import torch
 from torch.utils.data import Dataset
-from PIL import Image
+from PIL import Image, ImageFile, ImageOps
+
+# Allow loading truncated images rather than failing
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -24,6 +27,7 @@ class HARDataset(Dataset):
         self.data_dir = Path(data_dir)
         self.split = split
         self.preprocess = preprocess
+        self.skipped_images = 0
         
         # Load dataset
         self.load_dataset()
@@ -60,13 +64,22 @@ class HARDataset(Dataset):
                 image_extensions = ['*.jpg', '*.jpeg', '*.png', '*.bmp', '*.gif']
                 for ext in image_extensions:
                     for img_path in class_dir.glob(ext):
-                        self.samples.append({
-                            'image_path': str(img_path),
-                            'class_name': class_name,
-                            'class_id': len(self.class_names) - 1,
-                            'text': self.create_text_description(class_name)
-                        })
+                        # Verify image is readable to avoid runtime failures
+                        try:
+                            with Image.open(img_path) as im:
+                                im.verify()
+                            self.samples.append({
+                                'image_path': str(img_path),
+                                'class_name': class_name,
+                                'class_id': len(self.class_names) - 1,
+                                'text': self.create_text_description(class_name)
+                            })
+                        except Exception as e:
+                            self.skipped_images += 1
+                            logger.warning(f"Skipping unreadable image {img_path}: {e}")
         
+        if self.skipped_images:
+            logger.info(f"Skipped {self.skipped_images} unreadable images for {self.split} split")
         logger.info(f"Loaded {len(self.samples)} samples for {self.split} split")
         logger.info(f"Found {len(self.class_names)} action classes: {self.class_names}")
         
@@ -94,16 +107,17 @@ class HARDataset(Dataset):
         sample = self.samples[idx]
         
         try:
-            # Load and transform image
-            image = Image.open(sample['image_path']).convert('RGB')
-            if self.preprocess:
-                image = self.preprocess(image)
+            # Load image, apply EXIF orientation, and convert to RGB
+            image = Image.open(sample['image_path'])
+            image = ImageOps.exif_transpose(image)
+            image = image.convert('RGB')
         except Exception as e:
             logger.warning(f"Could not load image {sample['image_path']}: {e}")
-            # Create a black image as fallback
+            # Create a black image as fallback to keep batch shape consistent
             image = Image.new('RGB', (224, 224), color='black')
-            if self.preprocess:
-                image = self.preprocess(image)
+
+        if self.preprocess:
+            image = self.preprocess(image)
         
         return {
             'image': image,
