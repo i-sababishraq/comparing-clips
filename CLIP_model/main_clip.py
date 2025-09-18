@@ -17,18 +17,18 @@ def run_lora_training():
     
     # Command to run
     cmd = [
-        'conda', 'run', '-n', 'clip_har_env',
+        'conda', 'run', '--prefix', '/anvil/projects/x-soc250046/x-sishraq/CLIP/CLIP_model/clip_har_env',
         'python', 'train_clip_lora.py',
         '--data_dir', '../data',
-        '--epochs', '15',
+        '--epochs', '1',
         '--batch_size', '64',
         '--lr', '1e-3',
         '--rank', '16',
         '--alpha', '32',
-        '--checkpoint_dir', './checkpoints/clip_lora_15e'
+        '--checkpoint_dir', './checkpoints/clip_lora_1e'
     ]
     
-    print("Starting LoRA CLIP training for 15 epochs...")
+    print("Starting LoRA CLIP training for 1 epoch...")
     print(f"Command: {' '.join(cmd)}")
     print("=" * 60)
     
@@ -55,14 +55,14 @@ def run_evaluation():
     
     # Command to run evaluation
     cmd = [
-        'conda', 'run', '-n', 'clip_har_env',
+        'conda', 'run', '--prefix', '/anvil/projects/x-soc250046/x-sishraq/CLIP/CLIP_model/clip_har_env',
         'python', 'evaluate_lora_clip.py',
         '--data_dir', '../data',
-        '--checkpoint', 'checkpoints/clip_lora_15e/clip_lora_best.pt',
+        '--checkpoint', 'checkpoints/clip_lora_1e/clip_lora_best.pt',
         '--model_name', 'ViT-B/32',
         '--rank', '16',
         '--alpha', '32',
-        '--output_csv', 'lora_clip_15e_results.csv'
+        '--output_csv', '/anvil/projects/x-soc250046/x-sishraq/CLIP/results/clip/lora_clip_1e_results.csv'
     ]
     
     print("\nRunning evaluation on trained model...")
@@ -107,7 +107,7 @@ def main():
         
         if evaluation_success:
             print("\nComplete pipeline finished successfully!")
-            print("Results saved to: lora_clip_15e_results.csv")
+            print("Results saved to: lora_clip_1e_results.csv")
         else:
             print("\nTraining completed but evaluation failed")
     else:

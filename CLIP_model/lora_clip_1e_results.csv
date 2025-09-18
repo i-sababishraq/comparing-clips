@@ -1,0 +1,66 @@
+Metric,Value,Type
+Accuracy,0.8795,Overall
+Top-3 Accuracy,0.9741,Overall
+Top-5 Accuracy,0.9928,Overall
+Macro Precision,0.8657,Overall
+Macro Recall,0.8759,Overall
+Macro F1,0.8621,Overall
+Weighted Precision,0.891,Overall
+Weighted Recall,0.8795,Overall
+Weighted F1,0.8791,Overall
+Precision,0.8909,Class_calling
+Recall,0.7778,Class_calling
+F1-Score,0.8305,Class_calling
+Support,126.0,Class_calling
+Precision,0.9872,Class_clapping
+Recall,0.6111,Class_clapping
+F1-Score,0.7549,Class_clapping
+Support,126.0,Class_clapping
+Precision,0.9265,Class_cycling
+Recall,1.0,Class_cycling
+F1-Score,0.9618,Class_cycling
+Support,126.0,Class_cycling
+Precision,0.9492,Class_dancing
+Recall,0.8889,Class_dancing
+F1-Score,0.918,Class_dancing
+Support,126.0,Class_dancing
+Precision,0.916,Class_drinking
+Recall,0.9524,Class_drinking
+F1-Score,0.9339,Class_drinking
+Support,126.0,Class_drinking
+Precision,0.9535,Class_eating
+Recall,0.9762,Class_eating
+F1-Score,0.9647,Class_eating
+Support,126.0,Class_eating
+Precision,0.8601,Class_fighting
+Recall,0.9762,Class_fighting
+F1-Score,0.9145,Class_fighting
+Support,126.0,Class_fighting
+Precision,0.8667,Class_hugging
+Recall,0.9286,Class_hugging
+F1-Score,0.8966,Class_hugging
+Support,126.0,Class_hugging
+Precision,0.7386,Class_laughing
+Recall,0.8968,Class_laughing
+F1-Score,0.81,Class_laughing
+Support,126.0,Class_laughing
+Precision,0.9196,Class_listening_to_music
+Recall,0.8175,Class_listening_to_music
+F1-Score,0.8655,Class_listening_to_music
+Support,126.0,Class_listening_to_music
+Precision,0.9909,Class_running
+Recall,0.8651,Class_running
+F1-Score,0.9237,Class_running
+Support,126.0,Class_running
+Precision,0.7829,Class_sitting
+Recall,0.8016,Class_sitting
+F1-Score,0.7922,Class_sitting
+Support,126.0,Class_sitting
+Precision,0.8759,Class_sleeping
+Recall,0.9524,Class_sleeping
+F1-Score,0.9125,Class_sleeping
+Support,126.0,Class_sleeping
+Precision,0.4615,Class_texting
+Recall,0.8182,Class_texting
+F1-Score,0.5902,Class_texting
+Support,22.0,Class_texting

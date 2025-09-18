@@ -7,6 +7,9 @@ import argparse
 import logging
 import pandas as pd
 from pathlib import Path
+import time
+import psutil
+import numpy as np
 
 import torch
 import torch.nn.functional as F
@@ -58,9 +61,13 @@ def zero_shot_classification(model, test_loader, class_names, device):
     all_predictions = []
     all_labels = []
     all_similarities = []
+    mem_usage_mb = []
+    total_samples = 0
+    t_start = time.time()
     
     with torch.no_grad():
         for batch in test_loader:
+            mem_usage_mb.append(psutil.Process().memory_info().rss / 1024 / 1024)
             images = batch['image'].to(device)
             labels = batch['class_id'].cpu().numpy()
             
@@ -75,8 +82,20 @@ def zero_shot_classification(model, test_loader, class_names, device):
             all_predictions.extend(predictions)
             all_labels.extend(labels)
             all_similarities.extend(similarities.cpu().numpy())
+            total_samples += images.size(0)
     
-    return all_predictions, all_labels, all_similarities
+    total_time_sec = time.time() - t_start
+    avg_mem_mb = float(np.mean(mem_usage_mb)) if mem_usage_mb else 0.0
+    peak_mem_mb = float(np.max(mem_usage_mb)) if mem_usage_mb else 0.0
+    throughput = float(total_samples / total_time_sec) if total_time_sec > 0 else 0.0
+    
+    return all_predictions, all_labels, all_similarities, {
+        'total_time_sec': total_time_sec,
+        'throughput_samples_per_sec': throughput,
+        'avg_memory_mb': avg_mem_mb,
+        'peak_memory_mb': peak_mem_mb,
+        'total_samples': total_samples,
+    }
 
 
 def compute_metrics(predictions, labels, similarities, class_names):
@@ -156,7 +175,7 @@ def main():
     logger.info(f"Classes: {class_names}")
     
     # Evaluate
-    predictions, labels, similarities = zero_shot_classification(
+    predictions, labels, similarities, perf = zero_shot_classification(
         model, test_loader, class_names, device
     )
     
@@ -172,6 +191,9 @@ def main():
     logger.info(f"Top-5 Accuracy: {metrics['top5_accuracy']:.4f}")
     logger.info(f"Macro F1: {metrics['macro_f1']:.4f}")
     logger.info(f"Weighted F1: {metrics['weighted_f1']:.4f}")
+    logger.info(f"Throughput (samples/sec): {perf['throughput_samples_per_sec']:.2f}")
+    logger.info(f"Avg Memory (MB): {perf['avg_memory_mb']:.2f}")
+    logger.info(f"Peak Memory (MB): {perf['peak_memory_mb']:.2f}")
     
     # Create detailed results DataFrame
     results_data = []
@@ -221,6 +243,27 @@ def main():
         'Metric': 'Weighted F1',
         'Value': round(metrics['weighted_f1'], 4),
         'Type': 'Overall'
+    })
+    # Performance metrics
+    results_data.append({
+        'Metric': 'Throughput (samples/sec)',
+        'Value': round(perf['throughput_samples_per_sec'], 2),
+        'Type': 'Performance'
+    })
+    results_data.append({
+        'Metric': 'Avg Memory (MB)',
+        'Value': round(perf['avg_memory_mb'], 2),
+        'Type': 'Performance'
+    })
+    results_data.append({
+        'Metric': 'Peak Memory (MB)',
+        'Value': round(perf['peak_memory_mb'], 2),
+        'Type': 'Performance'
+    })
+    results_data.append({
+        'Metric': 'Total Time (sec)',
+        'Value': round(perf['total_time_sec'], 2),
+        'Type': 'Performance'
     })
     
     # Per-class metrics

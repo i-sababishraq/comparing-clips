@@ -1,15 +1,61 @@
-# Additional requirements for HAR fine-tuning
-# Base CLIP requirements are already in requirements.txt
+# Complete requirements for CLIP HAR fine-tuning environment
+# This file contains all packages needed for the clip_har_env
 
-scikit-learn>=1.2.0
-pandas>=1.5.0
-matplotlib>=3.6.0
-seaborn>=0.12.0
-kaggle>=1.5.12
-wandb>=0.13.0
-tensorboard>=2.11.0
-opencv-python>=4.7.0
-jupyter>=1.0.0
-ipykernel>=6.19.0
+# Core ML and Deep Learning
+torch>=2.8.0
+torchvision>=0.23.0
+numpy>=2.0.2
+scipy>=1.13.1
+scikit-learn>=1.6.1
+
+# Data Processing and Visualization
+pandas>=2.3.2
+matplotlib>=3.9.4
+seaborn>=0.13.2
+opencv-python>=4.12.0.88
+pillow>=11.3.0
+
+# Jupyter and Development
+jupyter>=1.1.1
+ipykernel>=6.30.1
+ipython>=8.18.1
+ipywidgets>=8.1.7
+notebook>=7.4.5
+jupyterlab>=4.4.7
+
+# Experiment Tracking and Monitoring
+wandb>=0.21.4
+tensorboard>=2.20.0
+tensorboard-data-server>=0.7.2
+
+# Data Sources
+kaggle>=1.7.4.5
+
+# System and Utilities
+psutil>=7.0.0
+tqdm>=4.67.1
+click>=8.1.8
+requests>=2.32.5
+urllib3>=2.5.0
+certifi>=2025.8.3
+
+# Text Processing
+regex>=2025.9.1
+ftfy>=6.3.1
+
+# Configuration and Logging
+pyyaml>=6.0.2
+python-json-logger>=3.3.0
+
+# Git and Version Control
+GitPython>=3.1.45
+
+# Additional Dependencies
+packaging>=25.0
+filelock>=3.19.1
+fsspec>=2025.9.0
+typing_extensions>=4.15.0
+importlib_metadata>=8.7.0
+importlib_resources>=6.5.2
 
 

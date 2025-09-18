@@ -10,6 +10,7 @@ import time
 import psutil
 from pathlib import Path
 from typing import Dict, List, Tuple
+import pandas as pd
 import json
 import csv
 
@@ -285,9 +286,9 @@ def main():
     parser = argparse.ArgumentParser(description='SigLIP performance evaluation')
     parser.add_argument('--data_dir', type=str, required=True, help='Path to HAR dataset')
     parser.add_argument('--batch_sizes', type=int, nargs='+', 
-                        default=[32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32000],
+                        default=[64],
                         help='Batch sizes to evaluate')
-    parser.add_argument('--output_dir', type=str, default='./siglip_performance_results', 
+    parser.add_argument('--output_dir', type=str, default='/anvil/projects/x-soc250046/x-sishraq/CLIP/results/siglip', 
                         help='Output directory')
     parser.add_argument('--model_name', type=str, default='google/siglip-base-patch16-224', 
                         help='SigLIP model name')
@@ -311,9 +312,27 @@ def main():
     logger.info("Starting SigLIP performance evaluation...")
     results = evaluator.evaluate_all_batch_sizes()
     
-    # Save results
-    csv_file = output_dir / 'siglip_performance_results.csv'
-    evaluator.save_results(results, str(csv_file))
+    # Save results (wide format across batch sizes)
+    csv_file_wide = output_dir / 'siglip_performance_results_wide.csv'
+    evaluator.save_results(results, str(csv_file_wide))
+
+    # Also save standardized long-form CSV (Metric, Value, Type) for the first/only batch size
+    if len(results) > 0:
+        r = results[0]
+        long_rows = [
+            {'Metric': 'Accuracy', 'Value': round(float(r['accuracy']), 4), 'Type': 'Overall'},
+            {'Metric': 'F1 Macro', 'Value': round(float(r['f1_macro']), 4), 'Type': 'Overall'},
+            {'Metric': 'Throughput (samples/sec)', 'Value': round(float(r['throughput_samples_per_sec']), 2), 'Type': 'Performance'},
+            {'Metric': 'Avg Memory (MB)', 'Value': round(float(r['avg_memory_mb']), 2), 'Type': 'Performance'},
+            {'Metric': 'Peak Memory (MB)', 'Value': round(float(r['peak_memory_mb']), 2), 'Type': 'Performance'},
+            {'Metric': 'Total Time (sec)', 'Value': round(float(r['total_time']), 2), 'Type': 'Performance'},
+            {'Metric': 'Batch Size', 'Value': int(r['batch_size']), 'Type': 'RunConfig'},
+            {'Metric': 'Total Samples', 'Value': int(r['total_samples']), 'Type': 'RunConfig'},
+        ]
+        df_long = pd.DataFrame(long_rows)
+        long_csv = output_dir / 'siglip_performance_results.csv'
+        df_long.to_csv(long_csv, index=False)
+        logger.info(f"Standardized results saved to {long_csv}")
     
     # Generate plots
     evaluator.generate_performance_plots(results, str(output_dir))

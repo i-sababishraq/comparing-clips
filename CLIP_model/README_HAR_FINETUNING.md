@@ -1,6 +1,6 @@
 # CLIP Fine-tuning on Human Action Recognition Dataset
 
-This directory contains the setup for fine-tuning the OpenAI CLIP model on the Human Action Recognition (HAR) dataset.
+This directory contains the complete setup for fine-tuning the OpenAI CLIP model on the Human Action Recognition (HAR) dataset using various robust fine-tuning methods including LoRA (Low-Rank Adaptation).
 
 ## Directory Structure
 
@@ -11,14 +11,18 @@ CLIP_model/
 │   ├── clip.py                    # Main CLIP interface
 │   ├── model.py                   # Model architecture
 │   └── simple_tokenizer.py       # Tokenization
-├── train_clip_har.py              # Fine-tuning script for HAR dataset
-├── evaluate_clip_har.py           # Evaluation script
-├── setup_clip_har_env.sh          # Environment setup script
+├── har_dataset.py                 # HAR dataset class (reusable)
+├── train_clip_lora.py             # LoRA fine-tuning script (RECOMMENDED)
+├── evaluate_lora_clip.py          # LoRA evaluation script
+├── main_clip.py                   # Automated training pipeline
+├── train_clip_augmented.py        # Data augmentation + hard pair mining
+├── setup_clip_har_env.sh          # Complete environment setup script
 ├── requirements.txt               # Base CLIP requirements
-├── requirements_har.txt           # Additional HAR requirements
-├── config_har.json               # Training configuration
+├── requirements_har.txt           # Complete HAR requirements (all packages)
 ├── checkpoints/                   # Model checkpoints (created during training)
-├── data/                          # Dataset directory (you'll add the HAR dataset here)
+│   ├── clip_lora_15e/            # LoRA fine-tuned model (15 epochs)
+│   └── clip_lora_5e/             # LoRA fine-tuned model (5 epochs)
+├── data/                          # Dataset directory
 ├── results/                       # Evaluation results
 └── logs/                          # Training logs
 ```
@@ -82,29 +86,53 @@ data/har_dataset/
     └── ...
 ```
 
-## Training
+## Training Methods
 
-### Basic Training
+### 1. LoRA Fine-tuning (RECOMMENDED)
 
-```bash
-python train_clip_har.py --data_dir data/har_dataset --epochs 20
-```
+LoRA (Low-Rank Adaptation) is the most effective method, achieving 89.28% accuracy while training only 0.02% of parameters.
 
-### Training with Configuration File
+#### Automated Training Pipeline
 
 ```bash
-python train_clip_har.py --data_dir data/har_dataset --config config_har.json
+# Run complete LoRA training and evaluation pipeline
+python main_clip.py
 ```
 
-### Training Options
+#### Manual LoRA Training
+
+```bash
+# Train LoRA model for 15 epochs
+python train_clip_lora.py --data_dir ../data --epochs 15 --batch_size 64 --lr 1e-3 --rank 16 --alpha 32 --checkpoint_dir ./checkpoints/clip_lora_15e
+
+# Evaluate the trained model
+python evaluate_lora_clip.py --data_dir ../data --checkpoint checkpoints/clip_lora_15e/clip_lora_best.pt --model_name ViT-B/32 --rank 16 --alpha 32 --output_csv lora_clip_15e_results.csv
+```
+
+#### LoRA Training Options
 
 - `--data_dir`: Path to HAR dataset directory
 - `--model_name`: CLIP model variant (ViT-B/32, ViT-B/16, ViT-L/14, RN50, etc.)
-- `--batch_size`: Batch size for training
-- `--epochs`: Number of training epochs
-- `--learning_rate`: Learning rate
+- `--batch_size`: Batch size for training (default: 64)
+- `--epochs`: Number of training epochs (default: 15)
+- `--lr`: Learning rate (default: 1e-3)
+- `--rank`: LoRA rank (default: 16)
+- `--alpha`: LoRA alpha scaling (default: 32)
 - `--checkpoint_dir`: Directory to save checkpoints
-- `--config`: JSON configuration file
+
+### 2. Data Augmentation + Hard Pair Mining
+
+```bash
+python train_clip_augmented.py --data_dir ../data --epochs 15 --batch_size 64 --lr 1e-3 --checkpoint_dir ./checkpoints/clip_augmented_15e
+```
+
+### 3. Legacy Methods (Not Recommended)
+
+The following methods were tested but showed poor performance due to catastrophic forgetting:
+
+- **Full Fine-tuning**: Achieved only 7.6% accuracy (vs 85.7% zero-shot)
+- **Linear Probe**: Achieved 83.25% accuracy but limited flexibility
+- **Two-tier Learning Rate**: Achieved 52.4% accuracy but still below zero-shot
 
 ### Available CLIP Models
 
@@ -184,18 +212,31 @@ Zero-shot accuracy: 0.612
 
 ### Performance Metrics
 
-The fine-tuning should improve performance on the HAR dataset compared to zero-shot CLIP:
+#### LoRA Fine-tuning Results (15 epochs)
 
-- **Baseline CLIP Zero-shot**: ~30-50% accuracy (depends on dataset)
-- **Fine-tuned CLIP**: ~60-80% accuracy (target improvement)
-- **Top-3 Accuracy**: Usually 10-15% higher than top-1
-- **Top-5 Accuracy**: Usually 15-20% higher than top-1
+- **Baseline CLIP Zero-shot**: 85.70% accuracy
+- **LoRA Fine-tuned CLIP**: **89.28% accuracy** (+3.58% improvement)
+- **Training Parameters**: Only 0.02% of total model parameters
+- **Memory Efficiency**: Significantly reduced memory usage
+- **Training Time**: ~45 minutes for 15 epochs on single GPU
 
-### Training Time
+#### Performance Comparison
 
-- **ViT-B/32 on single GPU**: ~2-3 hours for 20 epochs (depends on dataset size)
-- **ViT-L/14 on single GPU**: ~4-6 hours for 20 epochs
-- **Memory Usage**: 6-12GB GPU memory (depends on model and batch size)
+| Method | Accuracy | Parameters Trained | Memory Usage | Training Time |
+|--------|----------|-------------------|--------------|---------------|
+| Zero-shot CLIP | 85.70% | 0% | Low | N/A |
+| LoRA (5 epochs) | 88.70% | 0.02% | Low | ~15 min |
+| LoRA (15 epochs) | **89.28%** | 0.02% | Low | ~45 min |
+| Full Fine-tuning | 7.60% | 100% | High | ~2 hours |
+| Linear Probe | 83.25% | 0.1% | Medium | ~30 min |
+| Two-tier LR | 52.40% | 100% | High | ~2 hours |
+
+### Training Time and Resources
+
+- **LoRA ViT-B/32**: ~3 minutes per epoch on single GPU
+- **Memory Usage**: 4-6GB GPU memory (vs 8-12GB for full fine-tuning)
+- **Parameter Efficiency**: 99.98% reduction in trainable parameters
+- **Convergence**: Stable training without catastrophic forgetting
 
 ## Troubleshooting
 
